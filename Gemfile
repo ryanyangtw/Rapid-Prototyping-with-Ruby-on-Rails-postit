@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+#gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -38,14 +38,19 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'bootstrap-sass', '~> 2.3.2.0'
+gem 'bcrypt', '~> 3.1.7'
+
+gem 'rack-cache', :require => 'rack/cache'
 
 
 group :development do
   gem 'quiet_assets'
   gem 'pry'
   gem 'pry-rails'
-  gem 'pry-byebug'
+  #gem 'pry-byebug'
   gem 'meta_request'
+  gem 'did_you_mean'
   gem 'better_errors'
   gem "binding_of_caller"
   gem 'guard-livereload'

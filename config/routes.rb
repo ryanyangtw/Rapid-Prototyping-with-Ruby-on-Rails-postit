@@ -1,4 +1,22 @@
 Rails.application.routes.draw do
+
+  root to: 'posts#index'
+
+  get '/register', to: 'users#new'
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
+
+  resources :posts, except: [:destroy] do
+    resources :comments, only: [:create]
+  end
+  resources :categories
+  resources :users, only: [:show, :edit, :create, :update] 
+
+  #get '/:username/edit', to: 'users#edit', as: 'edit_user'
+  #get '/:username/',  to: 'users#show', as: 'show_user'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
