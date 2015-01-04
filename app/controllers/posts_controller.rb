@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :require_user, except:[:index, :show]
 
   def index
-    @posts = Post.all
+    @posts = Post.all.sort_by{|x| x.total_votes}.reverse
     #expires_in 999999999999, piblic: true
     fresh_when @products, public: true
   end
