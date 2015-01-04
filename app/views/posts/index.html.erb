@@ -4,20 +4,5 @@
 </p>
 
 <% @posts.each do |post| %>
-  <div class="row">
-    <div class="span8 well">
-      <%= render post.categories %>
-      <%#= render partial: 'categories/category', collection: @post.categories ,as: :category%>
-
-      <h4><%= link_to post.title, fix_url(post.url) %></h4>
-      <p> <%= post.description %></p>
-      <p>
-        <span class="quiet"> posted by  </span> <%= post.creator.try(:username)%>
-        <small> at <%= post.created_at %> </small>
-      </p>
-      <small>
-        <span> <%= link_to("#{post.comments.size} comments", post_path(post))%></span>
-      </small>
-    </div>
-  </div>
+  <%= render partial: 'post', locals: {post: post}%>
 <% end %>
