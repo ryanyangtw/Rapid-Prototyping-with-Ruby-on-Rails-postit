@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include Sluggable
+
   has_many :posts
   has_many :comments
   has_many :votes
@@ -12,9 +14,11 @@ class User < ActiveRecord::Base
 
   #在update user 時，若password column沒有輸入字串或是輸入空白字串，password不會被跟新
 
-  before_save :generate_slug!
+  #before_save :generate_slug!
+  sluggable_column :username
 
 
+=begin
   def to_param
     self.slug
   end
@@ -45,5 +49,6 @@ class User < ActiveRecord::Base
     str.gsub! /-+/, "-"
     str.downcase
   end
+=end
 
 end

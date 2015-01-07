@@ -1,4 +1,6 @@
 class Post < ActiveRecord::Base
+  include Voteable
+  include Sluggable
 
   belongs_to :creator, class_name: 'User', foreign_key: 'user_id' 
   has_many :comments
@@ -6,15 +8,21 @@ class Post < ActiveRecord::Base
   has_many :post_categories
   has_many :categories, through: :post_categories
 
-  has_many :votes, as: :voteable
+  # Move code to Concern (config.root/lib/voteable.rb) 
+  #has_many :votes, as: :voteable
 
 
   validates :title, presence: true, length: {minimum: 5}
   validates :description, presence: true
   validates :url, presence: true, uniqueness: true
 
-  before_save :generate_slug!
+  sluggable_column :title
 
+  # Move code to Concern (config.root/lib/sluggable.rb) 
+  #before_save :generate_slug!
+
+# Move code to Concern (config.root/lib/voteable.rb) 
+=begin
   def total_votes
     self.up_votes - self.down_votes
   end
@@ -26,6 +34,10 @@ class Post < ActiveRecord::Base
   def down_votes
     self.votes.where(vote: false).size
   end
+=end
+
+# Move code to Concern (config.root/lib/sluggable.rb) 
+=begin
 
   def to_param
     self.slug
@@ -57,7 +69,7 @@ class Post < ActiveRecord::Base
     str.gsub! /-+/, "-"
     str.downcase
   end
-
+=end
 
 
 end

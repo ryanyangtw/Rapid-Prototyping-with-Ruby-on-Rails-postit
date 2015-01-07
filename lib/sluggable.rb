@@ -1,27 +1,22 @@
-class Category < ActiveRecord::Base
-  include Sluggable
+module Sluggable
+  extend ActiveSupport::Concern
 
-  has_many :post_categories
-  has_many :posts, through: :post_categories
+  included do
+    before_save :generate_slug!
+    class_attribute :slug_column 
+  end
 
-  validates :name, presence: true
-
-  before_save :generate_slug!
-
-  sluggable_column :name
-
-=begin
   def to_param
     self.slug
   end
 
   def generate_slug!
-    the_slug = to_slug(self.name)
-    category = Category.find_by slug: the_slug
+    the_slug = to_slug( self.send(self.class.slug_column.to_sym) )
+    obj = self.class.find_by slug: the_slug
     count = 2
-    while category && category != self
+    while obj && obj != self
       the_slug = append_suffix(the_slug, count)
-      category = Category.find_by slug: the_slug
+      obj = self.class.find_by slug: the_slug
       count += 1
     end
     self.slug = the_slug
@@ -41,6 +36,12 @@ class Category < ActiveRecord::Base
     str.gsub! /-+/, "-"
     str.downcase
   end
-=end
+
+  module ClassMethods
+    def sluggable_column(col_name)
+      self.slug_column = col_name
+    end
+  end
+
 
 end
