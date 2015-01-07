@@ -1,3 +1,5 @@
+# Move code to voteable_ryan gem
+=begin
 # Usinfg Concerns
 module Voteable
   extend ActiveSupport::Concern 
@@ -21,7 +23,7 @@ module Voteable
   end
 
 end
-
+=end
 
 
 
