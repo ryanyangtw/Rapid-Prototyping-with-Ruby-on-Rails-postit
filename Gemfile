@@ -21,6 +21,7 @@ gem 'rack-cache', :require => 'rack/cache'
 #load gem from local folder
 #gem 'voteable_ryan', '= 0.0.2', path: '/Users/Ryan/Rails Class/Tealeaf/Level 2 - Rapid Prototyping with Ruby on Rails/RedoAssignment/voteable-gem'
 gem 'voteable_ryan', '~> 0.0.1'
+gem 'sluggable_ryan', '~> 0.0.0'
 
 
 
