@@ -23,6 +23,8 @@ gem 'rack-cache', :require => 'rack/cache'
 gem 'voteable_ryan', '~> 0.0.1'
 gem 'sluggable_ryan', '~> 0.0.0'
 
+gem 'twilio-ruby' 
+
 
 
 group :development do
