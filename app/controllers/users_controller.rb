@@ -40,12 +40,12 @@ class UsersController < ApplicationController
   #Didn't implement delete account
   def destroy
   end
-
+  
 
   private 
   
   def user_params
-    params.require(:user).permit(:username, :password)
+    params.require(:user).permit(:username, :password, :time_zone, :phone)
   end
 
   def set_user

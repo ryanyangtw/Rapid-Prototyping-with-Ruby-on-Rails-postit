@@ -2,14 +2,14 @@
 
 <%# binding.pry%>
   <div class='span0 well text-center'>
-    <%= link_to vote_post_path(post, vote: true), method: :POST do%>
+    <%= link_to vote_post_path(post, vote: true), method: :POST, remote: true do%>
       <i class='icon-arrow-up'></i>
     <%end%>
     <br/>
-    <span><%= post.total_votes %> votes</span>
+    <span id="post_<%= post.slug%>_votes"><%= post.total_votes %> votes</span>
     <br/>
 
-    <%= link_to vote_post_path(post, vote: false), method: :POST do %>
+    <%= link_to vote_post_path(post, vote: false), method: :POST, remote: true do %>
       <i class='icon-arrow-down'></i>
     <% end %>
   </div>
@@ -19,7 +19,7 @@
     <h4><%=link_to post.title, fix_url(post.url) %></h4>
     <p><%= post.description %></p>
     <p> 
-      <span class="quite">posted by</span> <%= link_to(post.creator.username, user_path(post.creator.username) ) if post.creator.present?%>
+      <span class="quite">posted by</span> <%= link_to(post.creator.username, user_path(post.creator) ) if post.creator.present?%>
       <small>at <%= display_datetime(post.created_at) %></small>
     </p>
       <small>
